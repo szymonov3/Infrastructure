@@ -1,0 +1,8 @@
+version: '2.4'
+
+services:
+  frontend:
+    image: szymonov/frontend:latest
+    container_name: frontend_1
+    ports:
+      - 5000:5000

@@ -1,0 +1,21 @@
+version: '2.4'
+
+services:
+  jenkins:
+    build: /home/panda/Infrastructure/jankins_controller
+    container_name: jenkins
+    restart: always
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /home/panda/Infrastructure/jankins_controller/jenkins.yaml:/usr/share/jenkins/ref/jenkins.yaml
+
+  sonarqube:
+    image: sonarqube:10.2.1-community
+    container_name: sonarqube
+    restart: always
+    ports:
+      - "9000:9000"
+    depends_on:
+      - jenkins

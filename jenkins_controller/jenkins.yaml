@@ -8,14 +8,32 @@ jenkins:
     globalMatrix:
       permissions:
         - "Overall/Administer:panda"
+  numExecutors: 0
+  nodes:
+  - permanent:
+      labelString: "agent"
+      launcher:
+        ssh:
+          credentialsId: "jenkins_agent"
+          host: "192.168.44.44"
+          port: 2222
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      name: "agent"
+      remoteFS: "/home/jenkins/agent"
+      retentionStrategy: "always"
 
 credentials:
   system:
     domainCredentials:
     - credentials:
+      - usernamePassword:
+          id: "artifactory"
+          username: "admin"
+          password: "password"
+          scope: GLOBAL
       - basicSSHUserPrivateKey:
-          description: "panda"
-          id: "panda"
+          id: "jenkins_agent"
+          username: "jenkins"
           privateKeySource:
             directEntry:
               privateKey: |
@@ -47,8 +65,7 @@ credentials:
                 o1epS4clbUspxKat9tbIIRccKa9GWXVDNLih8TslLCBoL/knJc+aqw==
                 -----END RSA PRIVATE KEY-----
           scope: GLOBAL
-          username: "panda"
-numExecutors: 0
+
 tool:
   sonarRunnerInstallation:
     installations:

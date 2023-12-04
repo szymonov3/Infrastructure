@@ -3,8 +3,6 @@ ENV DEBIAN_FRONTEND noninteractive
 USER root
 RUN apt-get update && apt-get install -y python3 python3-pip curl unzip git ansible
 RUN groupadd -g 997 docker && usermod -aG docker jenkins
-RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && sudo ./aws/install
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh ./get-docker.sh
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install
 RUN curl -SL https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
-USER jenkins
-RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt

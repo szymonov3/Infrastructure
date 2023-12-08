@@ -1,14 +1,14 @@
-- name: instaluj taski
+- name: Install tasks
   hosts: local
   connection: local
   become: true
 
   tasks:
-  - name: Zainstaluj htop
+  - name: Install htop
     package:
       name: htop
       state: present
-  - name: zainstaluj python3-pip
+  - name: Install python3-pip
     package:
       name: python3-pip
       state: present
